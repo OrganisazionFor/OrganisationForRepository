@@ -4,13 +4,19 @@ from classes import *
 
 class Bot:
     def __init__(self):
-        pass
-
+        # FILE_NAME = 'phone_book.pickle'
+        self.file = 'phone_book.pickle'
+        self.book = AddressBook()
+        try:
+            with open(self.file, 'rb') as fh:
+                read_book = pickle.load(fh)
+                self.book.data = read_book
+        except:
+            print('New phone book has been created\n')
    
 
     def run(self):
 
-        book = AddressBook()
 
         commands = {
 
@@ -37,12 +43,7 @@ class Bot:
             'good bye': good_bye,
 
         }
-        try:
-            with open(FILE_NAME, 'rb') as fh:
-                read_book = pickle.load(fh)
-                book.data = read_book
-        except:
-            print('New phone book has been created\n')
+
 
         while True:
             try:
