@@ -221,35 +221,22 @@ class Bot:
     def run(self):
 
         commands = {
-
-
-
-
-            # New contact, phone, birthday - - - > 1 Alex 1111111111 31.12.1700
             "1": self.add_contact_phone_birthday,
-            "2": self.add_contact,                # New contact                  - - - > 2 Alex
-            # Add phone                    - - - > 3 Alex 2222222222
+            "2": self.add_contact,
             "3": self.add_phone,
-            # Add birthday                 - - - > 4 Alex 31.12.1700
             "4": self.add_birthday,
-            # Edit name                    - - - > 5 Alex Alexandr
             "5": self.edit_name,
-            # # Edit phone                   - - - > 6 Alexandr 2222222222 3333333333
             "6": self.edit_phone,
-            # # Edit birthday                - - - > 7 Alexandr 31.12.1701
             '7': self.edit_birthday,
-            # Day to birthday              - - - > 8 Alexandr
             "8": self.days_to_birthday,
-            # Search                       - - - > 9 text
             "search": self.search,
             "remove": self.remove,
-            # Show all contact            - - - > show all
             "show all": self.show_all,
-            'help': self.help,                      # Commands list               - - - > help
-            # # Good bye!                   - - - > good bye / exit / close
+            'help': self.help,
             'good bye': self.good_bye,
-
         }
+
+        print(TEXT)
 
         while True:
             try:
@@ -262,7 +249,5 @@ class Bot:
                 if result == 'Good bye!':
                     break
 
-            except Exception as e:
-                print(e)
-                # print('\n Check your input! \n')
-                
+            except:
+                print('\n Check your input! \n')

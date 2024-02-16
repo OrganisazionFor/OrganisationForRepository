@@ -129,8 +129,8 @@ class Record:
 class AddressBook(UserDict):
     def add_record(self, record):
         for user, data in self.data.items():
-            if str(data.name.value) == str(record.name.value):
-                # if data.name.value == record.name.value:
+            # if str(data.name.value) == str(record.name.value):
+            if data.name.value == record.name.value:
                 return self.data[user]
         self.data[record.name.value] = record
 
@@ -139,8 +139,7 @@ class AddressBook(UserDict):
     def find(self, name: str):  # -> Record:
         # inner method. not for user's search
         for key, value in self.data.items():
-            if name == str(key.value):
-                # if name == key:
+            if name == key:
                 return self.data[key]
 
     def iterator(self, n=2):
@@ -186,5 +185,3 @@ class AddressBook(UserDict):
             raise KeyError
 
         return record
-    # def __eq__(self, other):
-    #     return isinstance(other, Phone) and self.value == other.value
