@@ -1,6 +1,6 @@
 ﻿import pickle
 from classes import *
-from c_exeptions import *
+from c_exceptions import *
 
 TEXT = \
     """
