@@ -49,7 +49,7 @@ class Bot:
         return inner
 
     @input_error
-    def add_contact_phone_birthday(book, data):
+    def add_contact_phone_birthday(self, book, data):
 
         data = data[0]
         name = data[0]
@@ -64,14 +64,14 @@ class Bot:
         return record
 
     @input_error
-    def add_contact(book, data):
+    def add_contact(self, book, data):
 
         record = Record(Name(data[0][0]))
         book.add_record(record)
         return record
 
     @input_error
-    def add_phone(book, data):
+    def add_phone(self, book, data):
         data = data[0]
         name = data[0]
         record = book.find(name)
@@ -81,7 +81,7 @@ class Bot:
         return record
 
     @input_error
-    def add_birthday(book, data):
+    def add_birthday(self, book, data):
         data = data[0]
         name = data[0]
         record = book.find(name)
@@ -90,18 +90,18 @@ class Bot:
 
         return record
 
-    def console_input():
+    def console_input(self):
         return input('> ').lower().strip()
 
     @input_error
-    def edit_name(book, data):
+    def edit_name(self, book, data):
         data = data[0]
         old_name, new_name = data
         record = book.edit_record(old_name, new_name)
         return record
 
     @input_error
-    def edit_phone(book, data):
+    def edit_phone(self, book, data):
         data = data[0]
         name, old_phone, new_phone = data
         print(new_phone, old_phone)
@@ -110,7 +110,7 @@ class Bot:
         return record
 
     @input_error
-    def edit_birthday(book, data):
+    def edit_birthday(self, book, data):
         data = data[0]
         name, birthday = data
         record = book.find(name)
@@ -118,7 +118,7 @@ class Bot:
         return record
 
     @input_error
-    def days_to_birthday(book, data):
+    def days_to_birthday(self, book, data):
         name = data[0][0]
         record = book.find(name)
         if record:
@@ -126,7 +126,7 @@ class Bot:
             return f"Days to birthday: {result}"
 
     @input_error
-    def find(book, data):
+    def find(self, book, data):
 
         search = data[0]
 
@@ -144,14 +144,14 @@ class Bot:
                 raise KeyError
             return result
 
-    def hello(book, data):
+    def hello(self, book, data):
         return '\n  Hello how can I help you?\n'
 
-    def help(book, data):
+    def help(self, book, data):
         return TEXT
 
     @input_error
-    def good_bye(book, data):
+    def good_bye(self, book, data):
         try:
             with open('phone_book.pickle', 'wb') as fh:
                 pickle.dump(book.data, fh)
@@ -162,7 +162,7 @@ class Bot:
         return 'Good bye!'
 
     @input_error
-    def remove(book, data):
+    def remove(self, book, data):
         data = data[0]
         name = data[0]
 
@@ -183,7 +183,7 @@ class Bot:
                 raise KeyError
 
     @input_error
-    def search(book, data):
+    def search(self, book, data):
         text = data[0][0]
         result = book.search(text)
 
@@ -194,7 +194,7 @@ class Bot:
         else:
             print('\n  No results \n')
 
-    def show_all(book, data):
+    def show_all(self, book, data):
         if not book:
             print('\n Phone book is empty\n')
 
@@ -209,7 +209,7 @@ class Bot:
                 input('')
 
     @input_error
-    def parser(user_input, commands):
+    def parser(self, user_input, commands):
         for command in commands:
             if user_input.startswith(command):
                 # data = user_input.replace(command, '').split()
@@ -262,5 +262,7 @@ class Bot:
                 if result == 'Good bye!':
                     break
 
-            except:
-                print('\n Check your input! \n')
+            except Exception as e:
+                print(e)
+                # print('\n Check your input! \n')
+                
