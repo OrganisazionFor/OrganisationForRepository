@@ -130,14 +130,8 @@ class Record:
 
 class AddressBook(UserDict):
     def add_record(self, record):
-        # for user, data in self.data.items():
-        #     if str(data.name.value) == str(record.name.value):
-        #     # print('135', record.name.value, data.name.value)
-        #     # print('135', type(record.name.value), type(data.name.value))
-        #     # if data.name.value == record.name.value:
-        #         return self.data[user]
+
         if str(record.name.value) not in self.data:
-            print('139', type(record.name.value))
             self.data[str(record.name.value)] = record
             return record
 
