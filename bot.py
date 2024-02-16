@@ -66,6 +66,7 @@ class Bot:
     @input_error
     def add_contact(self, book, data):
 
+
         record = Record(Name(data[0][0]))
         book.add_record(record)
         return record
@@ -206,7 +207,7 @@ class Bot:
             for record in book.iterator(2):
                 # print(record)
                 print(*record)
-                input('')
+                # input('')
 
     @input_error
     def parser(self, user_input, commands):
@@ -249,5 +250,6 @@ class Bot:
                 if result == 'Good bye!':
                     break
 
-            except:
-                print('\n Check your input! \n')
+            except Exception as e:
+                # print('\n Check your input! \n')
+                print(e)

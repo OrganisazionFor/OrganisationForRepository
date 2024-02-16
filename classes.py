@@ -6,7 +6,7 @@ class Field:
 
     def __init__(self, value):
 
-        if self.validator(value):
+        if self.is_valid(value):
             self.__value = value
         else:
             raise ValueError
@@ -14,11 +14,11 @@ class Field:
     def __str__(self):
         return str(self.value)
 
-    def __repr__(self):
-        return str(self.value)
+    # def __repr__(self):
+    #     return str(self.value)
 
     @staticmethod
-    def validator(value):
+    def is_valid(value):
         return True
 
     @property
@@ -28,7 +28,7 @@ class Field:
     @value.setter
     def value(self, value):
 
-        if self.validator(value):
+        if self.is_valid(value):
             self.__value = value
         else:
             raise ValueError
@@ -41,13 +41,13 @@ class Name(Field):
 class Phone(Field):
 
     @staticmethod
-    def validator(value):
+    def is_valid(value):
         return len(value) == 10 and value.isdigit()
 
 
 class Birthday(Field):
     @staticmethod
-    def validator(value):
+    def is_valid(value):
         try:
             datetime.strptime(value, '%d.%m.%Y')
             return True
@@ -96,7 +96,8 @@ class Record:
         return
 
     def edit_name(self, new_name):
-        self.name.value = Name(new_name)
+        # self.name.value = Name(new_name)
+        self.name = Name(new_name)
 
     def edit_phone(self, old_phone, new_phone):
         Phone(new_phone)
@@ -107,7 +108,8 @@ class Record:
     def find_phone(self, search):
 
         for phone in self.phones:
-            if str(phone.value) == search:
+            # if str(phone.value) == search:
+            if phone.value == search:
                 return phone
 
         raise ValueError
@@ -128,13 +130,18 @@ class Record:
 
 class AddressBook(UserDict):
     def add_record(self, record):
-        for user, data in self.data.items():
-            # if str(data.name.value) == str(record.name.value):
-            if data.name.value == record.name.value:
-                return self.data[user]
-        self.data[record.name.value] = record
+        # for user, data in self.data.items():
+        #     if str(data.name.value) == str(record.name.value):
+        #     # print('135', record.name.value, data.name.value)
+        #     # print('135', type(record.name.value), type(data.name.value))
+        #     # if data.name.value == record.name.value:
+        #         return self.data[user]
+        if str(record.name.value) not in self.data:
+            print('139', type(record.name.value))
+            self.data[str(record.name.value)] = record
+            return record
 
-        return record
+        raise KeyError
 
     def find(self, name: str):  # -> Record:
         # inner method. not for user's search
