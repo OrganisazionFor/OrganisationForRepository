@@ -1,5 +1,6 @@
 ﻿import pickle
 from classes import *
+from c_exeptions import *
 
 TEXT = \
     """
@@ -65,7 +66,6 @@ class Bot:
 
     @input_error
     def add_contact(self, book, data):
-
 
         record = Record(Name(data[0][0]))
         book.add_record(record)
